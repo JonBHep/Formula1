@@ -1,0 +1,50 @@
+﻿<Window x:Class="Formula1.DriverPickerWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:local="clr-namespace:Formula1"
+        mc:Ignorable="d"
+        Title="Drivers" Height="800" Width="1024" ShowInTaskbar="False" ContentRendered="Window_ContentRendered"  WindowStartupLocation="Manual" Top="30" Left="60" Loaded="Window_Loaded">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <ListBox x:Name="DriverListBoxOne" Grid.Column="0" Margin="3" SelectionChanged="ItemListBox_SelectionChanged" Background="Ivory"></ListBox>
+        <ListBox x:Name="DriverListBoxTwo" Grid.Column="1" Margin="3" SelectionChanged="ItemListBox_SelectionChanged" Background="Ivory"></ListBox>
+        <Grid Grid.Column="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <Button x:Name="CompleteButton" HorizontalAlignment="Left" DockPanel.Dock="Top" Margin="4" Padding="8 3" Click="CompleteButton_Click">Show all drivers</Button>
+            <Button Grid.Row="1" Width="80" HorizontalAlignment="Left" Margin="4" Padding="8 3" IsCancel="True">Close</Button>
+            <StackPanel x:Name="PotentialRacePositionStackPanel" Orientation="Horizontal" Grid.Row="2" Height="42" Margin="10,10,0,0">
+                <TextBlock Foreground="RosyBrown" VerticalAlignment="Center" FontWeight="Medium" >Putative race position</TextBlock>
+                <TextBlock x:Name="PotentialRacePositionTextBox" Foreground="Maroon" FontWeight="Bold" Margin="8,0,0,0" VerticalAlignment="Center" FontSize="15">[xxxxx]</TextBlock>
+            </StackPanel>
+            
+            <DockPanel Grid.Row="3" LastChildFill="False" x:Name="NewEntryDock">
+                <TextBlock Margin="4" DockPanel.Dock="Top" FontWeight="Medium" >New entry</TextBlock>
+                <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
+                    <Label VerticalAlignment="Center" Target="{Binding SurnameTextBox}" Width="72">Surname</Label>
+                    <TextBox x:Name="SurnameTextBox" Width="200" Height="28" TextChanged="TextBlock_TextChanged" VerticalContentAlignment="Center" Margin="4"></TextBox>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
+                    <Label Content="Forenames" Target="{Binding ForenamesTextBox}" Width="72"></Label>
+                    <TextBox x:Name="ForenamesTextBox" Width="200" Height="28" TextChanged="TextBlock_TextChanged" VerticalContentAlignment="Center" Margin="4"></TextBox>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
+                    <Label Content="Country" Width="72"></Label>
+                    <Button x:Name="CountriesComboBox" Width="80" Padding="12 3" VerticalAlignment="Center" Click="CountriesButton_Click" Margin="4">Pick</Button>
+                    <TextBlock x:Name="CountryTextBlock" VerticalAlignment="Center" Margin="4 0 0 0"></TextBlock>
+                </StackPanel>
+                <Button x:Name="AddButton" Width="80" DockPanel.Dock="Top" Margin="4" Padding="8 3" Click="AddButton_Click">Add</Button>
+            </DockPanel>
+        </Grid>
+    </Grid>
+</Window>

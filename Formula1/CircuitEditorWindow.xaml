@@ -1,0 +1,39 @@
+﻿<Window x:Class="Formula1.CircuitEditorWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:local="clr-namespace:Formula1"
+        mc:Ignorable="d"
+        Title="Circuit properties" SizeToContent="Height" Height="430" Width="800" ResizeMode="NoResize" ShowInTaskbar="False" WindowStartupLocation="CenterScreen" ContentRendered="Window_ContentRendered" Background="Cornsilk">
+    <Grid Margin="0,0,0,10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="27"/>
+            <RowDefinition Height="36"/>
+            <RowDefinition Height="120"/>
+            <RowDefinition Height="34"/>
+            <RowDefinition Height="34"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <TextBlock FontWeight="Bold" VerticalAlignment="Center" Margin="6 0 0 0">Circuit name(s)</TextBlock>
+        <DockPanel Grid.Row="1">
+            <Button DockPanel.Dock="Right" Width="80" Padding="12 3" VerticalAlignment="Center" Margin="4 0 6 0" Click="AddNameButton_Click">Add</Button>
+            <TextBox x:Name="CircuitNameTextBox" Height="28" Margin="4 0 0 0" VerticalContentAlignment="Center"></TextBox>
+        </DockPanel>
+        <ListBox x:Name="NamesListBox" Grid.Row="2" Margin="4" SelectionChanged="NamesListBox_SelectionChanged"></ListBox>
+        <DockPanel Grid.Row="3" LastChildFill="False">
+            <Button x:Name="DeleteNameButton" DockPanel.Dock="Right" Width="80" Padding="12 3" VerticalAlignment="Center" Margin="0 0 4 0" Click="DeleteNameButton_Click">Delete</Button>
+            <Button x:Name="PromoteNameButton" DockPanel.Dock="Right" Width="80" Padding="12 3" VerticalAlignment="Center" Margin="0 0 4 0" Click="PromoteNameButton_Click">Promote</Button>
+        </DockPanel>
+        
+        <DockPanel Grid.Row="4" >
+            <TextBlock Text="Country" Margin="4 0" VerticalAlignment="Center"></TextBlock>
+            <Button Width="80" Padding="12 3" VerticalAlignment="Center" Click="CountriesButton_Click" >Pick</Button>
+            <TextBlock x:Name="CountryTextBlock" VerticalAlignment="Center" Margin="4 0 4 0" Foreground="DarkOrchid" ></TextBlock>
+        </DockPanel>
+        <DockPanel Grid.Row="5" LastChildFill="False">
+            <Button x:Name="SaveButton" Width="80" Padding="12 3" VerticalAlignment="Center" Margin="4 6 0 6" FontWeight="Bold" Click="SaveButton_Click" >Save</Button>
+            <Button Width="80" Padding="12 3" VerticalAlignment="Center" Margin="4 6 0 6" IsCancel="True">Cancel</Button>
+        </DockPanel>
+    </Grid>
+</Window>

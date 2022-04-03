@@ -1,0 +1,48 @@
+﻿<Window x:Class="Formula1.DriverStatsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:local="clr-namespace:Formula1"
+        mc:Ignorable="d"
+        Title="Drivers" Height="900" Width="1500" ShowInTaskbar="False" ContentRendered="Window_ContentRendered" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+    <Grid Background="Gainsboro">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition Width="2*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="40"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <DockPanel Grid.Column="0" Grid.Row="0" >
+            <TextBlock VerticalAlignment="Center" Margin="6 0 0 0">Filter</TextBlock>
+            <TextBox x:Name="FilterTextBox" VerticalAlignment="Center" Margin="4 0 4 0" FontWeight="Medium" TextChanged="FilterTextBox_TextChanged"></TextBox>
+        </DockPanel>
+        
+        <ListBox x:Name="FilteredListBox" Grid.Row="1" Grid.Column="0" SelectionChanged="FilteredListBox_SelectionChanged"></ListBox>
+        
+        <ListBox x:Name="DriversListBox" Grid.Column="1" Grid.RowSpan="2" Background="GhostWhite" Margin="3,3,3,0" SelectionChanged="ItemListBox_SelectionChanged"></ListBox>
+        
+        <DockPanel Grid.Column="1" Grid.Row="2" LastChildFill="False">
+            <TextBlock VerticalAlignment="Center" FontWeight="Bold" Margin="8,0,8,0">KEY: </TextBlock>
+            <TextBlock x:Name="AccidentRacingTextBlock" VerticalAlignment="Center" FontFamily = "Webdings" Text ="A" FontSize = "16" Margin="8 0" Foreground ="Red" ToolTip="Died in a racing-related accident"></TextBlock>
+            <TextBlock x:Name="AccidentOtherTextBlock" VerticalAlignment="Center" FontFamily = "Webdings" Text ="A" FontSize = "16" Margin="8 0" Foreground ="Black" ToolTip="Died in a non-racing-related accident"></TextBlock>
+            <TextBlock x:Name="VivantTextBlock" VerticalAlignment="Center" FontFamily = "Webdings" Text ="C" FontSize = "16" Margin="8 0" Foreground ="Blue" ToolTip="Still living"></TextBlock>
+            <TextBlock x:Name="BlesséTextBlock" VerticalAlignment="Center" FontFamily = "Webdings" Text ="C" FontSize = "16" Margin="8 0" Foreground ="Chocolate" ToolTip="Still living but suffered a career-shortening injury"></TextBlock>
+        </DockPanel>
+
+        <DockPanel Grid.Column="2">
+            <Button x:Name="DetailsButton" VerticalAlignment="Center" Padding="12 3" Margin="4 0" MinWidth="72" Click="DetailsButton_Click" IsEnabled="False" ToolTip="Edit driver details">Details</Button>
+            <Button x:Name="GraphButton" VerticalAlignment="Center" Padding="12 3" Margin="4 0" MinWidth="72" Click="GraphButton_Click" ToolTip="Driver's career in graphic form" IsEnabled="False">Graph</Button>
+            <Button x:Name="DisplayButton" VerticalAlignment="Center" Padding="12 3" Margin="4 0 8 0" MinWidth="72" Click="DisplayButton_Click" IsEnabled="False" ToolTip="Display driver career history">Career</Button>
+            <Button VerticalAlignment="Center" Padding="12 3" Margin="4 0" MinWidth="72" DockPanel.Dock="Right" Click="CloseButton_Click">Close</Button>
+            <TextBlock x:Name="HistoryHeadingTextBlock" VerticalAlignment="Center" FontSize="16" FontWeight="Bold" >driver</TextBlock>
+        </DockPanel>
+        
+        <ListBox x:Name="HistoryListBox" Background="WhiteSmoke" Grid.Column="2" Grid.Row="1" Margin="3" Grid.RowSpan="2" FontSize="14" ></ListBox>
+    </Grid>
+</Window>

@@ -1,0 +1,39 @@
+﻿<Window x:Class="Formula1.SeasonScoresWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:local="clr-namespace:Formula1"
+        mc:Ignorable="d"
+        Title="Season scores" Height="800" Width="1024" ContentRendered="Window_ContentRendered" ShowInTaskbar="False" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="32"></RowDefinition>
+            <RowDefinition Height="32"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <DockPanel LastChildFill="False">
+            <TextBlock x:Name="SeasonTextBlock" VerticalAlignment="Center" Margin="8 0 0 0" FontWeight="Black" FontSize="14">1066 season</TextBlock>
+            <TextBlock VerticalAlignment="Center" Margin="16 0 0 0" >Number of races:</TextBlock>
+            <TextBlock VerticalAlignment="Center" Margin="16 0 0 0" FontWeight="Bold">Stated</TextBlock>
+            <TextBox x:Name="StatedRaceCountTextBox" Margin="4 0 0 0" VerticalAlignment="Center" FontWeight="Bold" Foreground="DarkGreen" Width="40" TextChanged="StatedRaceCountTextBox_TextChanged"></TextBox>
+            <Button x:Name="StatedRaceCountButton" VerticalAlignment="Center" Margin="8 0" Padding="12 3" Click="StatedRaceCountButton_Click">Set</Button>
+            <TextBlock VerticalAlignment="Center" Margin="16 0" FontWeight="Bold">Documented</TextBlock>
+            <TextBlock x:Name="DocumentedRacesCountTextBlock" VerticalAlignment="Center" Margin="16 0" FontWeight="Bold" Foreground="DarkGreen">X</TextBlock>
+            <Button x:Name="GraphButton" Padding="20 3" VerticalAlignment="Center" Margin="16 0 0 0" ToolTip="Graphical representation of driver and constructor standing over the season" Click="GraphButton_Click">Graph</Button>
+            <TextBlock x:Name="GraphWarningTextBlock" VerticalAlignment="Center" Margin="8 0" Foreground="DarkGreen">Graphs only available when 3 or more races have been documented</TextBlock>
+        </DockPanel>
+        <DockPanel Grid.Row="1" LastChildFill="False">
+            <!--<TextBlock x:Name="SeasonTextBlock" VerticalAlignment="Center" Margin="8 0" FontWeight="Black" FontSize="14">1066 season</TextBlock>-->
+            <Button Width="72" VerticalAlignment="Center" Padding="8 3" Margin="8 0" Click="ScoringButton_Click" ToolTip="Points allocation explained (Wikipedia)">Scoring</Button>
+            <TextBlock VerticalAlignment="Center" Margin="8 0" >Point scoring schemes for:</TextBlock>
+            <TextBlock VerticalAlignment="Center" Margin="8 0" FontWeight="Bold" >Drivers' Championship</TextBlock>
+            <Button x:Name="DriversSchemeButton" VerticalAlignment="Center" Margin="8 0" Padding="12 3" Click="DriversSchemeButton_Click">Set</Button>
+            <TextBlock VerticalAlignment="Center" Margin="8 0" FontWeight="Bold">Constructors' Championship</TextBlock>
+            <Button x:Name="ConstructorsSchemeButton" VerticalAlignment="Center" Margin="8 0" Padding="12 3" Click="ConstructorsSchemeButton_Click">Set</Button>
+            <Button Padding="12 3" VerticalAlignment="Center" Margin="4 0" Width="60" DockPanel.Dock="Right" Click="CloseButton_Click" FontWeight="Bold">Close</Button>
+            <!--<Button x:Name="GraphButton" Padding="12 3" VerticalAlignment="Center" Margin="4 0" Width="60" DockPanel.Dock="Right" Click="GraphButton_Click">Graph</Button>-->
+        </DockPanel>
+        <ListBox x:Name="SeasonListBox" Grid.Row="2" Margin="4"></ListBox>
+    </Grid>
+</Window>

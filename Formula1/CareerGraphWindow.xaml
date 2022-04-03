@@ -1,0 +1,26 @@
+﻿<Window x:Class="Formula1.CareerGraphWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:local="clr-namespace:Formula1"
+        mc:Ignorable="d"
+        Title="Career graph" Height="768" Width="1366" ShowInTaskbar="False" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Loaded="Window_Loaded">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <DockPanel Background="Moccasin">
+            <Button Width="72" DockPanel.Dock="Right" VerticalAlignment="Center" Padding="12 3" Margin="4 0" Background="Ivory" Foreground="SaddleBrown" FontWeight="Medium" IsCancel="True">Close</Button>
+            <TextBlock x:Name="NomTextBlock" FontSize="16" VerticalAlignment="Center" Margin="8 0" Foreground="SaddleBrown" FontWeight="Bold">Driver's name</TextBlock>
+            <Ellipse Width="8" Height="8" Fill="RoyalBlue" Margin="8 0 4 0"></Ellipse>
+            <TextBlock VerticalAlignment="Center" Foreground="RoyalBlue">Race position</TextBlock>
+            <Ellipse Width="6" Height="6" Fill="Peru" Margin="8 0 4 0"></Ellipse>
+            <TextBlock VerticalAlignment="Center" Foreground="Peru">Grid position (if did not finish) Circled in red if driver killed</TextBlock>
+        </DockPanel>
+        <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
+            <Canvas x:Name="ChartCanvas" Background="BlanchedAlmond" ></Canvas>
+        </ScrollViewer>
+    </Grid>
+</Window>

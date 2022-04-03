@@ -136,7 +136,7 @@ namespace Formula1
 
         private void TimeButton_Click(object sender, RoutedEventArgs e)
         {
-            TimelineWindow w = new TimelineWindow() {Owner = this};
+            TimeLineWindow w = new TimeLineWindow() {Owner = this};
             w.ShowDialog();
         }
 

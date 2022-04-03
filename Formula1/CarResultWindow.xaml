@@ -1,0 +1,173 @@
+﻿<Window x:Class="Formula1.CarResultWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:local="clr-namespace:Formula1"
+        mc:Ignorable="d"
+        Title="Car result" Height="550" Width="1020" Loaded="Window_Loaded" ContentRendered="Window_ContentRendered" ShowInTaskbar="False" AllowsTransparency="True" WindowStyle="None" Background="Transparent">
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid >
+                            <Rectangle x:Name="theRect" MinWidth="60" MinHeight="24" Fill="MintCream" Stroke="Green" RadiusX="2" RadiusY="2"/>
+                            <ContentPresenter x:Name="theGrid" Margin="8 3" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <!--Triggers dictate how button's appearance reacts to events-->
+                            <Trigger Property="Button.IsPressed" Value="True">
+                                <Setter TargetName ="theRect" Property="Opacity" Value="0.3"/>
+                            </Trigger>
+                            <Trigger Property="Button.IsMouseOver" Value="True">
+                                <Setter TargetName="theRect" Property="Fill" Value="Honeydew"/>
+                                <Setter TargetName="theRect" Property="Stroke" Value="DarkGreen"></Setter>
+                                <Setter TargetName="theRect" Property="StrokeThickness" Value="1.25"></Setter>
+                            </Trigger>
+                            <Trigger Property="Button.IsEnabled" Value="False">
+                                <Setter TargetName ="theRect" Property="Opacity" Value="0.2"/>
+                                <Setter TargetName="theRect" Property="Fill" Value="Silver"/>
+                                <Setter TargetName="theRect" Property="Stroke" Value="Gray"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Control.Margin" Value="3"/>
+            <!--Shouldn't be less than Rectangle height-->
+            <Setter Property="MinHeight" Value="26"/>
+            <Setter Property="MinWidth" Value="60"></Setter>
+        </Style>
+    </Window.Resources>
+
+    <Border Background="OldLace" BorderBrush="DarkGreen" BorderThickness="2" CornerRadius="10">
+        <Grid Margin="10" >
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition Height="2*"></RowDefinition>
+                <RowDefinition Height="2"></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <TextBlock x:Name="RaceTitleTextBlock" VerticalAlignment="Center" Foreground="SeaGreen" FontWeight="Bold" Margin="12 0">[race title]</TextBlock>
+
+            <StackPanel Orientation="Horizontal" Grid.Row="1">
+                <Label VerticalAlignment="Center" Width="100">Driver</Label>
+                <Button VerticalAlignment="Center" Width="50" Click="Driver0Button_Click">Pick</Button>
+                <TextBlock x:Name="DriverNameTextBlock" VerticalAlignment="Center" Margin="8 0" Foreground="IndianRed" FontWeight="Bold" FontSize="15">[not selected]</TextBlock>
+                <StackPanel x:Name="Driver2NamePanel" Orientation="Horizontal" Grid.Row="2">
+                    <Label Margin="20 0 0 0" VerticalAlignment="Center" Width="100">Second driver</Label>
+                    <Button VerticalAlignment="Center" Width="50" Click="Driver1Button_Click">Pick</Button>
+                    <TextBlock x:Name="Driver2NameTextBlock" VerticalAlignment="Center" Margin="8 0" Foreground="IndianRed" FontWeight="Bold" FontSize="15">[not selected]</TextBlock>
+                </StackPanel>
+                <StackPanel x:Name="Driver3NamePanel" Orientation="Horizontal" Grid.Row="2">
+                    <Label Margin="20 0 0 0" VerticalAlignment="Center" Width="100">Third driver</Label>
+                    <Button VerticalAlignment="Center" Width="50" Click="Driver2Button_Click">Pick</Button>
+                    <TextBlock x:Name="Driver3NameTextBlock" VerticalAlignment="Center" Margin="8 0" Foreground="IndianRed" FontWeight="Bold" FontSize="15">[not selected]</TextBlock>
+                </StackPanel>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Grid.Row="2">
+                <Label VerticalAlignment="Center" Width="100">Constructor</Label>
+                <Button VerticalAlignment="Center" Width="50" Click="ConstructorButton_Click">Pick</Button>
+                <TextBlock x:Name="ConstructorNameTextBlock" VerticalAlignment="Center" Margin="8 0" Foreground="IndianRed" FontWeight="Bold" FontSize="15">[not selected]</TextBlock>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Grid.Row="3">
+                <Label VerticalAlignment="Center" Width="100">Formula 2</Label>
+                <CheckBox x:Name="Formula2CheckBox" Grid.Column="1" VerticalAlignment="Center" VerticalContentAlignment="Center" IsThreeState="False">A Formula 2 car, not eligible for championship points in this race</CheckBox>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Grid.Row="4">
+                <Label VerticalAlignment="Center" Width="100">Constructor</Label>
+                <CheckBox x:Name="ConstructorDisallowedCheckBox" Grid.Column="1" VerticalAlignment="Center" VerticalContentAlignment="Center" IsThreeState="False">Constructor points disallowed for this car for a technical infringement or malpractice (or number of points deducted from constructor:</CheckBox>
+
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Grid.Row="5">
+                <Label VerticalAlignment="Center" Width="100">Controversy</Label>
+                <CheckBox x:Name="ControversyCheckBox" Grid.Column="1" VerticalAlignment="Center" VerticalContentAlignment="Center" IsThreeState="False">This car, driver or team was involved in controversy in this race</CheckBox>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Grid.Row="6">
+                <TextBox x:Name="ConstructorPointsFinedTextBox" VerticalAlignment="Center" Width="40" Margin="100 0 6 0"></TextBox>
+                <TextBlock VerticalAlignment="Center" >Number of points deducted from constructor as a penalty</TextBlock>
+            </StackPanel>
+
+            <Grid Grid.Row="7">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100"></ColumnDefinition>
+                    <ColumnDefinition Width="80"></ColumnDefinition>
+                    <ColumnDefinition ></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <Label VerticalAlignment="Center" Width="100">Grid position</Label>
+                <ComboBox x:Name="GridPosnComboBox" Grid.Column="1" Width="72" VerticalAlignment="Center" HorizontalAlignment="Left"></ComboBox>
+                <StackPanel x:Name="GridPosnStackPanel" Orientation="Horizontal" Grid.Column="2" />
+                <StackPanel x:Name="GridPosnStackPanel2" Orientation="Horizontal" Grid.Row="1" Grid.Column="2" />
+            </Grid>
+            <Border Grid.Row="8" Background="IndianRed"></Border>
+            <StackPanel Orientation="Horizontal" Grid.Row="9">
+                <Label VerticalAlignment="Center" Width="100">Race position</Label>
+                <ComboBox x:Name="RacePosnComboBox" Width="200" VerticalAlignment="Center" HorizontalAlignment="Left" SelectionChanged="RacePosnComboBox_SelectionChanged"></ComboBox>
+                <Button x:Name="PositionButton" VerticalAlignment="Center" Width="60" Margin="16 0 0 0" Padding="12 3" ToolTip="Select position" Click="PositionButton_Click" Foreground="DarkGreen">X</Button>
+                <Button x:Name="PositionGoButton" VerticalAlignment="Center" Width="60" Margin="16 0 0 0" Padding="12 3" ToolTip="Select position and skip points allocation" Click="PositionGoButton_Click" Foreground="DarkGreen">X</Button>
+                <Button VerticalAlignment="Center" Margin="16 0 0 0" ToolTip="Retired - mechanical failure" Padding="12 3" MinWidth="140" Click="RetireMechanicalButton_Click" Foreground="Firebrick">Mechanical failure</Button>
+                <Button VerticalAlignment="Center" Margin="16 0 0 0" ToolTip="Retired - accident or spun off" Padding="12 3" MinWidth="140" Click="RetireAccidentButton_Click" Foreground="Firebrick">Accident</Button>
+            </StackPanel>
+
+            <Label Grid.Row="10" VerticalAlignment="Center" >Race Points</Label>
+
+            <StackPanel Orientation="Horizontal" Grid.Row="11">
+                <Label x:Name="Driver1Label" VerticalAlignment="Center" Width="100" FontWeight="Medium">Driver 1</Label>
+                <TextBlock VerticalAlignment="Center" Margin="0 0 8 0">Leader points</TextBlock>
+                <ComboBox x:Name="RacePoints0ComboBox" Width="72" VerticalAlignment="Center" IsEditable="True"></ComboBox>
+                <TextBlock VerticalAlignment="Center" Margin="16 0 8 0">Sprint Qualifying points</TextBlock>
+                <ComboBox x:Name="SprintPoints0ComboBox" Width="72" VerticalAlignment="Center" IsEditable="True"></ComboBox>
+                <TextBlock VerticalAlignment="Center" Margin="16 0 8 0">Fastest lap</TextBlock>
+                <ComboBox x:Name="FLapPoints0ComboBox" Width="72" VerticalAlignment="Center" IsEditable="True"></ComboBox>
+                <TextBlock VerticalAlignment="Center" Margin="16 0 0 0" Foreground="SeaGreen">Enter points only as an integer or a fraction, so 1.5 would be entered as '3/2',</TextBlock>
+            </StackPanel>
+
+            <StackPanel x:Name="Driver2PointsPanel" Orientation="Horizontal" Grid.Row="12">
+                <Label x:Name="Driver2Label" VerticalAlignment="Center" Width="100" FontWeight="Medium">Driver 2</Label>
+                <TextBlock VerticalAlignment="Center" Margin="0 0 8 0">Leader points</TextBlock>
+                <ComboBox x:Name="RacePoints1ComboBox" Width="72" VerticalAlignment="Center" IsEditable="True"></ComboBox>
+                <TextBlock VerticalAlignment="Center" Margin="16 0 8 0">Sprint Qualifying points</TextBlock>
+                <ComboBox x:Name="SprintPoints1ComboBox" Width="72" VerticalAlignment="Center" IsEditable="True"></ComboBox>
+                <TextBlock VerticalAlignment="Center" Margin="16 0 8 0">Fastest lap</TextBlock>
+                <ComboBox x:Name="FLapPoints1ComboBox" Width="72" VerticalAlignment="Center" IsEditable="True"></ComboBox>
+            </StackPanel>
+
+            <StackPanel x:Name="Driver3PointsPanel" Orientation="Horizontal" Grid.Row="13">
+                <Label x:Name="Driver3Label" VerticalAlignment="Center" Width="100" FontWeight="Medium">Driver 3</Label>
+                <TextBlock VerticalAlignment="Center" Margin="0 0 8 0">Leader points</TextBlock>
+                <ComboBox x:Name="RacePoints2ComboBox" Width="72" VerticalAlignment="Center" IsEditable="True"></ComboBox>
+                <TextBlock VerticalAlignment="Center" Margin="16 0 8 0">Sprint Qualifying points</TextBlock>
+                <ComboBox x:Name="SprintPoints2ComboBox" Width="72" VerticalAlignment="Center" IsEditable="True"></ComboBox>
+                <TextBlock VerticalAlignment="Center" Margin="16 0 8 0">Fastest lap</TextBlock>
+                <ComboBox x:Name="FLapPoints2ComboBox" Width="72" VerticalAlignment="Center" IsEditable="True"></ComboBox>
+            </StackPanel>
+
+            <StackPanel Grid.Row="14" Orientation="Horizontal">
+                <Button VerticalAlignment="Center" Width="72" Padding="12 3" Margin="8 0 8 0" FontWeight="Medium" Click="OkayButton_Click">OK</Button>
+                <Button VerticalAlignment="Center" Width="72" Padding="12 3" Margin="8 0 8 0" IsCancel="True" >Cancel</Button>
+            </StackPanel>
+
+        </Grid>
+    </Border>
+</Window>

@@ -1,0 +1,22 @@
+﻿<Window x:Class="Formula1.SeasonGraphWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:local="clr-namespace:Formula1"
+        mc:Ignorable="d"
+        Title="Season championship" Height="450" Width="800" ShowInTaskbar="False" Loaded="Window_Loaded" ResizeMode="NoResize" ContentRendered="Window_ContentRendered">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <DockPanel>
+            <Button DockPanel.Dock="Right" Margin="0 0 6 0" VerticalAlignment="Center" Padding="12 3" IsCancel="True">Close</Button>
+            <TextBlock x:Name="SeasonTextBlock" VerticalAlignment="Center" Margin="8 0" FontWeight="Black" FontSize="14">1066 season</TextBlock>
+        </DockPanel>
+        <Canvas x:Name="DriversCanvas" Grid.Row="1" Background="Linen" Margin="4 0 4 0"></Canvas>
+        <Canvas x:Name="ConstructorsCanvas" Grid.Row="2" Background="Linen" Margin="4 4 4 4"></Canvas>
+    </Grid>
+</Window>

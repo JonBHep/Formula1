@@ -1,0 +1,33 @@
+﻿<Window x:Class="Formula1.CircuitPickerWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:local="clr-namespace:Formula1"
+        mc:Ignorable="d"
+        Title="Racing Circuits" Height="600" Width="800" ShowInTaskbar="False" Loaded="Window_Loaded" >
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <ListBox x:Name="ItemListBox" Margin="3" MouseRightButtonUp="ItemListBox_MouseRightButtonUp" MouseLeftButtonUp="ItemListBox_MouseLeftButtonUp" ></ListBox>
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <Button Grid.Row="0" Width="80" HorizontalAlignment="Left" Margin="4" Padding="8 3" IsCancel="True">Close</Button>
+            <StackPanel Grid.Row="1">
+                <TextBlock x:Name="GPHostedTextBlock" Margin="4" Foreground="Blue">Has hosted GP...</TextBlock>
+                <TextBlock Margin="4">Filter by country</TextBlock>
+                <ComboBox x:Name="PaysComboBox" Margin="4" SelectionChanged="PaysComboBox_SelectionChanged"></ComboBox>
+            </StackPanel>
+            <StackPanel Grid.Row="2">
+                <Button Width="80" Height="24" HorizontalAlignment="Left" Margin="6 4" ToolTip="Add a new circuit" Click="NewButton_Click">New</Button>
+                <TextBlock Margin="6">Click a circuit name to choose it; right-click to edit the circuit details</TextBlock>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>
