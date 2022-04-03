@@ -556,7 +556,7 @@ namespace Formula1
                 TextBlock tbOutcome = new TextBlock()
                 {
                     Foreground = pinceau, Margin = new Thickness(0, 0, 6, 0)
-                }; // margin is to provide a gap in case the outcome will be followed by a 'fastest lap' note
+                }; // margin is to provide a gap in case the outcome will be followed by a 'fastest lap' comment
                 TextBlock tbPoints = new TextBlock() {Foreground = Brushes.Magenta};
                 TextBlock tbOutcomeCode = new TextBlock() {Foreground = pinceau, FontWeight = FontWeights.Black};
 
