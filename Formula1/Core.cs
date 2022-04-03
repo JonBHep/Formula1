@@ -1832,4 +1832,10 @@ internal sealed class Core
             s.Children.Add(new System.Windows.Shapes.Rectangle() { Fill = System.Windows.Media.Brushes.Red, Width = 4, Height = 10 });
             return s;
         }
+        
+        public static void LaunchWebPage(string webAddress)
+        {
+            System.Diagnostics.ProcessStartInfo pinfo = new(webAddress) { UseShellExecute = true };
+            System.Diagnostics.Process.Start(pinfo);
+        }
 }

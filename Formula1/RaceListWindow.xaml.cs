@@ -588,7 +588,8 @@ public partial class RaceListWindow : Window
             if (RaceMeetingListBox.SelectedIndex < 0) { return; }
             ListBoxItem i = (ListBoxItem)RaceMeetingListBox.SelectedItem;
             int k = (int)i.Tag;
-            System.Diagnostics.Process.Start(Core.Instance.Races[k].WikiLinkRace);
+            // System.Diagnostics.Process.Start(Core.Instance.Races[k].WikiLinkRace);
+            Core.LaunchWebPage(Core.Instance.Races[k].WikiLinkRace);
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)

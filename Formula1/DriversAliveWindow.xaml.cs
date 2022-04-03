@@ -27,7 +27,8 @@ public partial class DriversAliveWindow : Window
         {
             if (!(VivantListBox.SelectedItem is ListBoxItem item)) { return; }
             int i = (int)item.Tag;
-            System.Diagnostics.Process.Start(Core.Instance.Drivers[i].WikiLinkString);
+            //System.Diagnostics.Process.Start(Core.Instance.Drivers[i].WikiLinkString);
+            Core.LaunchWebPage(Core.Instance.Drivers[i].WikiLinkString);
         }
 
         private void Window_ContentRendered(object sender, EventArgs e)

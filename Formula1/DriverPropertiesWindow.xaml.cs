@@ -260,7 +260,8 @@ public partial class DriverPropertiesWindow : Window
 
         private void WikiButton_Click(object sender, RoutedEventArgs e)
         {
-            System.Diagnostics.Process.Start(Core.Instance.Drivers[_driverKey].WikiLinkString);
+            //System.Diagnostics.Process.Start(Core.Instance.Drivers[_driverKey].WikiLinkString);
+            Core.LaunchWebPage(Core.Instance.Drivers[_driverKey].WikiLinkString);
         }
 
         private void DeathModeTextBox_TextChanged(object sender, TextChangedEventArgs e)

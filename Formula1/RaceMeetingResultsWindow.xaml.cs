@@ -401,7 +401,8 @@ public partial class RaceMeetingResultsWindow : Window
 
         private void WikiButton_Click(object sender, RoutedEventArgs e)
         {
-            System.Diagnostics.Process.Start(Core.Instance.Races[_raceMeetingKey].WikiLinkRace);
+            //System.Diagnostics.Process.Start(Core.Instance.Races[_raceMeetingKey].WikiLinkRace);
+            Core.LaunchWebPage(Core.Instance.Races[_raceMeetingKey].WikiLinkRace);
         }
 
         private void CompetitorsListBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
