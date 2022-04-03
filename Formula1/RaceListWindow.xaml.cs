@@ -253,13 +253,13 @@ public partial class RaceListWindow : Window
         private ListBoxItem Lister(RaceMeeting r)
         {
             StackPanel sp = new StackPanel() { Orientation = Orientation.Horizontal };
-            TextBlock t = new TextBlock() { Text = r.SerialNumber.ToString(Core.CultureUK), Foreground = Brushes.RosyBrown, Width = 30 };
+            TextBlock t = new TextBlock() { Text = r.SerialNumber.ToString(Core.CultureUk), Foreground = Brushes.RosyBrown, Width = 30 };
             sp.Children.Add(t);
             TextBlock ty = new TextBlock() { Text =$"{r.RaceDate.Year} R{r.YearSerialNumber}", Foreground = Brushes.Brown, Width = 80 };
             sp.Children.Add(ty);
             TextBlock td = new TextBlock() { Text = r.RaceDate.ToShortDateString(), Foreground = Brushes.RosyBrown, Width = 80 };
             sp.Children.Add(td);
-            string dow = r.RaceDate.ToString("ddd", Core.CultureUK);
+            string dow = r.RaceDate.ToString("ddd", Core.CultureUk);
             Brush br = Brushes.RosyBrown;
             if (dow != "Sun") { br = Brushes.Brown; }
             TextBlock tdow = new TextBlock() { Text = dow, Foreground = br, Width = 40 };
@@ -381,20 +381,21 @@ public partial class RaceListWindow : Window
             {
                 Season ssn = Core.Instance.Seasons[mtg.RaceDate.Year];
                 ssn.RefreshStatistics();
-                List<Tuple<float, float,float, int>> ranking = ssn.RankedDrivers(mtg.Key);
-                float scoretobeat =(ranking.Count>0) ? ranking[0].Item1:0;
+                
+                List<Tuple<float, float,float, int>> rankingD = ssn.RankedDrivers(mtg.Key);
+                float scoretobeat =(rankingD.Count>0) ? rankingD[0].Item1:0;
                 float prevscor = -1000;
                 int rankIndex = 0;
                 bool newrank;
-                float topscore = (ranking.Count > 0) ? ranking[0].Item1 : 0;
-                for (int r = 0; r < ranking.Count; r++)
+                float topscore = (rankingD.Count > 0) ? rankingD[0].Item1 : 0;
+                for (int r = 0; r < rankingD.Count; r++)
                 {
                     newrank = false;
-                    if (prevscor != ranking[r].Item2)
+                    if (prevscor != rankingD[r].Item2)
                     {
                         newrank = true;
                         rankIndex = r + 1;
-                        prevscor = ranking[r].Item2;
+                        prevscor = rankingD[r].Item2;
                     }
                     if (rankIndex < 6)
                     {
@@ -402,28 +403,28 @@ public partial class RaceListWindow : Window
                         StackPanel panel = new StackPanel() { Orientation = Orientation.Horizontal };
                         TextBlock RankTb = new TextBlock() { Text = d, MinWidth = 40 };
                         panel.Children.Add(RankTb);
-                        TextBlock RacerTb = new TextBlock() { Text = Core.Instance.Drivers[ranking[r].Item4].FullName, MinWidth = 180 };
-                        if (ranking[r].Item3 >= scoretobeat)
+                        TextBlock RacerTb = new TextBlock() { Text = Core.Instance.Drivers[rankingD[r].Item4].FullName, MinWidth = 180 };
+                        if (rankingD[r].Item3 >= scoretobeat)
                         {
                             Run ChampionTb = new Run() { Text = "«", FontFamily = new FontFamily("Wingdings"), FontSize=16, Foreground = Brushes.Red };
                             RacerTb.Inlines.Add(ChampionTb);
                         }
                         panel.Children.Add(RacerTb);
-                        TextBlock GoodPointsTb = new TextBlock() { Text = Core.MyFormat(ranking[r].Item1), MinWidth = 40, TextAlignment = TextAlignment.Right };
+                        TextBlock GoodPointsTb = new TextBlock() { Text = Core.MyFormat(rankingD[r].Item1), MinWidth = 40, TextAlignment = TextAlignment.Right };
                         panel.Children.Add(GoodPointsTb);
 
                         // show total points if not all points have been counted towards championship
                         TextBlock TotlPointsTb = new TextBlock() { MinWidth = 80, TextAlignment = TextAlignment.Right };
                         panel.Children.Add(TotlPointsTb);
-                        if (ranking[r].Item1 != ranking[r].Item2)
+                        if (rankingD[r].Item1 != rankingD[r].Item2)
                         {
-                            TotlPointsTb.Text = $"(total {Core.MyFormat(ranking[r].Item2)})";
+                            TotlPointsTb.Text = $"(total {Core.MyFormat(rankingD[r].Item2)})";
                         }
 
                         // show how far this score is behind the leader
                         TextBlock BehindTb = new TextBlock() { MinWidth = 40, TextAlignment = TextAlignment.Right, Foreground = Brushes.Gray };
                         panel.Children.Add(BehindTb);
-                        float behind = topscore - ranking[r].Item1;
+                        float behind = topscore - rankingD[r].Item1;
                         if (behind > 0)
                         {
                             BehindTb.Text = $"-{behind}";
@@ -449,25 +450,25 @@ public partial class RaceListWindow : Window
                         TeamsListBox.Items.Add(dlbi);
                     }
                 }
-            }
-
-            if (Core.Instance.Seasons.ContainsKey(mtg.RaceDate.Year)) // avoid error in case no results have yet been entered for this year
-            {
-                Season ssn = Core.Instance.Seasons[mtg.RaceDate.Year];
-                ssn.RefreshStatistics();
-                List<Tuple<float, float, int>> ranking = ssn.RankedConstructors(mtg.Key);
-                float prevscor = -1000;
-                int rankIndex = 0;
-                bool newrank;
-                float topscore = (ranking.Count > 0) ? ranking[0].Item1 : 0;
-                for (int r = 0; r < ranking.Count; r++)
+            // }
+            //
+            // if (Core.Instance.Seasons.ContainsKey(mtg.RaceDate.Year)) // avoid error in case no results have yet been entered for this year
+            // {
+            //     Season ssn = Core.Instance.Seasons[mtg.RaceDate.Year];
+            //     ssn.RefreshStatistics();
+                List<Tuple<float, float, int>> rankingC = ssn.RankedConstructors(mtg.Key);
+                prevscor = -1000;
+                rankIndex = 0;
+                newrank=false;
+                topscore = (rankingC.Count > 0) ? rankingC[0].Item1 : 0;
+                for (int r = 0; r < rankingC.Count; r++)
                 {
                     newrank = false;
-                    if (prevscor != ranking[r].Item2)
+                    if (prevscor != rankingC[r].Item2)
                     {
                         newrank = true;
                         rankIndex = r + 1;
-                        prevscor = ranking[r].Item2;
+                        prevscor = rankingC[r].Item2;
                     }
                     if (rankIndex < 6)
                     {
@@ -475,23 +476,23 @@ public partial class RaceListWindow : Window
                         StackPanel panel = new StackPanel() { Orientation = Orientation.Horizontal };
                         TextBlock RankTb = new TextBlock() { Text = d, MinWidth = 40 };
                         panel.Children.Add(RankTb);
-                        TextBlock RacerTb = new TextBlock() { Text = Core.ConstructorName(Core.Instance.Constructors[ranking[r].Item3].Caption), MinWidth = 180 };
+                        TextBlock RacerTb = new TextBlock() { Text = Core.ConstructorName(Core.Instance.Constructors[rankingC[r].Item3].Caption), MinWidth = 180 };
                         panel.Children.Add(RacerTb);
-                        TextBlock GoodPointsTb = new TextBlock() { Text = Core.MyFormat(ranking[r].Item1), MinWidth = 40, TextAlignment = TextAlignment.Right };
+                        TextBlock GoodPointsTb = new TextBlock() { Text = Core.MyFormat(rankingC[r].Item1), MinWidth = 40, TextAlignment = TextAlignment.Right };
                         panel.Children.Add(GoodPointsTb);
 
                         // show total points if not all points have been counted towards championship
                         TextBlock TotlPointsTb = new TextBlock() { MinWidth = 80, TextAlignment = TextAlignment.Right };
                         panel.Children.Add(TotlPointsTb);
-                        if (ranking[r].Item1 != ranking[r].Item2)
+                        if (rankingC[r].Item1 != rankingC[r].Item2)
                         {
-                            TotlPointsTb.Text = $"(total {Core.MyFormat(ranking[r].Item2)})";
+                            TotlPointsTb.Text = $"(total {Core.MyFormat(rankingC[r].Item2)})";
                         }
 
                         // show how far this score is behind the leader
                         TextBlock BehindTb = new TextBlock() { MinWidth = 40, TextAlignment = TextAlignment.Right, Foreground = Brushes.Gray };
                         panel.Children.Add(BehindTb);
-                        float behind = topscore - ranking[r].Item1;
+                        float behind = topscore - rankingC[r].Item1;
                         if (behind > 0)
                         {
                             BehindTb.Text = $"-{behind}";
@@ -559,7 +560,7 @@ public partial class RaceListWindow : Window
             List<Tuple<DateTime, int, bool>> morts = Core.Instance.DriversDiedSinceLastRace(mtg.Key);
             foreach (Tuple<DateTime, int, bool>  m in morts)
             {
-                TextBlock tblock = new TextBlock() { Text = $"{Core.Instance.Drivers[m.Item2].FullName} {m.Item1.ToString("d MMM yyyy", Core.CultureUK)}", Foreground = Brushes.SlateBlue };
+                TextBlock tblock = new TextBlock() { Text = $"{Core.Instance.Drivers[m.Item2].FullName} {m.Item1.ToString("d MMM yyyy", Core.CultureUk)}", Foreground = Brushes.SlateBlue };
                 if (m.Item3) { tblock.Foreground = Brushes.Red; }
                 ListBoxItem item = new ListBoxItem() { Content = tblock, IsHitTestVisible = false };
                 LastObituaryListBox.Items.Add(item);
@@ -569,7 +570,7 @@ public partial class RaceListWindow : Window
             List<Tuple<DateTime, int, bool>> deces = Core.Instance.DriversDiedBeforeNextRace(mtg.Key);
             foreach (Tuple<DateTime, int, bool> m in deces)
             {
-                TextBlock tblock = new TextBlock() { Text = $"{Core.Instance.Drivers[m.Item2].FullName} {m.Item1.ToString("d MMM yyyy", Core.CultureUK)}", Foreground = Brushes.SlateBlue };
+                TextBlock tblock = new TextBlock() { Text = $"{Core.Instance.Drivers[m.Item2].FullName} {m.Item1.ToString("d MMM yyyy", Core.CultureUk)}", Foreground = Brushes.SlateBlue };
                 if (m.Item3) { tblock.Foreground = Brushes.Red; }
                 ListBoxItem item = new ListBoxItem() { Content = tblock, IsHitTestVisible = false };
                 NextObituaryListBox.Items.Add(item);
@@ -594,10 +595,10 @@ public partial class RaceListWindow : Window
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            this.Height = Core.LowWindowHeight;
-            this.Top = Core.LowWindowTop;
-            this.Width = System.Windows.SystemParameters.PrimaryScreenWidth - 360;
-            this.Left = 20;
+            Height = Core.LowWindowHeight;
+            Top = Core.LowWindowTop;
+            Width = SystemParameters.PrimaryScreenWidth - 360;
+            Left = 20;
             CorrelationLine.Visibility = Visibility.Hidden;
         }
 

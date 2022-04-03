@@ -30,7 +30,7 @@ public partial class ChronologyWindow : Window
 
             int IComparable<ChronoEvent>.CompareTo(ChronoEvent other)
             {
-                return this.When.CompareTo(other.When);
+                return When.CompareTo(other.When);
             }
         }
         private void Window_ContentRendered(object sender, EventArgs e)
@@ -91,7 +91,7 @@ public partial class ChronologyWindow : Window
         private ListBoxItem MyLine(ChronoEvent ev, bool hideDate)
         {
             StackPanel pnl = new StackPanel() { Orientation = Orientation.Horizontal, Margin=new Thickness(54,0,0,0) };
-            string datestring = (hideDate) ? "" : ev.When.ToString("MMM dd",Core.CultureUK);
+            string datestring = (hideDate) ? "" : ev.When.ToString("MMM dd",Core.CultureUk);
             TextBlock bd = new TextBlock() { Text = datestring, Width = 84, Foreground = Brushes.DarkCyan, FontWeight=FontWeights.Bold };
             pnl.Children.Add(bd);
             TextBlock be = new TextBlock() { Text = ev.What, Foreground = ev.PinceauText };
@@ -103,7 +103,7 @@ public partial class ChronologyWindow : Window
         }
         private ListBoxItem MyLine(int yer)
         {
-            TextBlock block = new TextBlock() { Text = yer.ToString(Core.CultureUK), Width = 54, Foreground = Brushes.DarkCyan, FontWeight= FontWeights.Black };
+            TextBlock block = new TextBlock() { Text = yer.ToString(Core.CultureUk), Width = 54, Foreground = Brushes.DarkCyan, FontWeight= FontWeights.Black };
             ListBoxItem item = new ListBoxItem() { Content = block, IsHitTestVisible = false };
             return item;
         }

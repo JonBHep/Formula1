@@ -22,7 +22,7 @@ internal class NamedItem : IComparable<NamedItem>
     {
         System.Globalization.CultureInfo eng = new System.Globalization.CultureInfo("en-GB");
         // Create a culturally sensitive sort key for str1.
-        System.Globalization.SortKey sc1 = eng.CompareInfo.GetSortKey(this._caption);
+        System.Globalization.SortKey sc1 = eng.CompareInfo.GetSortKey(_caption);
         // Create a culturally sensitive sort key for str2.
         System.Globalization.SortKey sc2 = eng.CompareInfo.GetSortKey(other._caption);
         // Compare the two sort keys and display the results.

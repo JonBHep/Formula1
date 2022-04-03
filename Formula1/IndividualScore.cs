@@ -19,11 +19,16 @@ internal class IndividualScore : IComparable<IndividualScore>
         MaxTheoreticalSeasonTotal = 0;
     }
 
-    int IComparable<IndividualScore>.CompareTo(IndividualScore other)
+    int IComparable<IndividualScore>.CompareTo(IndividualScore? other)
     {
-        int x = other.CumulativeScoreCounted.CompareTo(this.CumulativeScoreCounted);
-        if (x == 0) { x = other.CumulativeScore.CompareTo(this.CumulativeScore); }
-        if (x == 0) { x = other.Score.CompareTo(this.Score); }
-        return x;
+        if (other is { } autre)
+        {
+            int x =autre.CumulativeScoreCounted.CompareTo(CumulativeScoreCounted);
+            if (x == 0) { x = other.CumulativeScore.CompareTo(CumulativeScore); }
+            if (x == 0) { x = other.Score.CompareTo(Score); }
+            return x;    
+        }
+
+        return 0;
     }
 }

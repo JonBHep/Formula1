@@ -26,7 +26,7 @@ internal class SeasonPointsAllocationScheme
         {
             get
             {
-                return $"{FirstBlockSize.ToString(System.Globalization.CultureInfo.InvariantCulture)}^{_firstBlockQuota.ToString(Core.CultureUK)}^{_secondBlockQuota.ToString(System.Globalization.CultureInfo.InvariantCulture)}";
+                return $"{FirstBlockSize.ToString(System.Globalization.CultureInfo.InvariantCulture)}^{_firstBlockQuota.ToString(Core.CultureUk)}^{_secondBlockQuota.ToString(System.Globalization.CultureInfo.InvariantCulture)}";
             }
             set
             {

@@ -78,7 +78,7 @@ public partial class DriverStatsWindow : Window
 
             int IComparable<RaceAppearance>.CompareTo(RaceAppearance other)
             {
-                return this.QDate.CompareTo(other.QDate);
+                return QDate.CompareTo(other.QDate);
             }
         }
 

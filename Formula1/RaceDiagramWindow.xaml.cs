@@ -17,7 +17,7 @@ public partial class RaceDiagramWindow : Window
             _ranking = Core.Instance.CompetitorRankings(RaceKey);
             RaceMeeting meet = Core.Instance.Races[RaceKey];
             double kt = meet.KendalTau();
-            Title =$"{Core.Instance.RaceTitles[meet.RaceTitleKey].Caption} {meet.RaceDate.Year} Kendal Tau: {kt.ToString("0.00", Core.CultureUK)}";
+            Title =$"{Core.Instance.RaceTitles[meet.RaceTitleKey].Caption} {meet.RaceDate.Year} Kendal Tau: {kt.ToString("0.00", Core.CultureUk)}";
         }
 
         private void Window_ContentRendered(object sender, EventArgs e)

@@ -34,14 +34,14 @@ public partial class ScoreSchemeWindow : Window
             else if (_scheme.LastBlockQuota == 0)
             {
                 RadioOne.IsChecked = true;
-                OneBlockQuotaTextBox.Text = _scheme.FirstBlockQuota.ToString(Core.CultureUK);
+                OneBlockQuotaTextBox.Text = _scheme.FirstBlockQuota.ToString(Core.CultureUk);
             }
             else
             {
                 RadioTwo.IsChecked = true;
-                TwoBlockFirstQuotaTextBox.Text=_scheme.FirstBlockQuota.ToString(Core.CultureUK);
-                TwoBlockFirstGroupTextBox.Text=_scheme.FirstBlockSize.ToString(Core.CultureUK);
-                TwoBlockLastQuotaTextBox.Text = _scheme.LastBlockQuota.ToString(Core.CultureUK);
+                TwoBlockFirstQuotaTextBox.Text=_scheme.FirstBlockQuota.ToString(Core.CultureUk);
+                TwoBlockFirstGroupTextBox.Text=_scheme.FirstBlockSize.ToString(Core.CultureUk);
+                TwoBlockLastQuotaTextBox.Text = _scheme.LastBlockQuota.ToString(Core.CultureUk);
             }
         }
 

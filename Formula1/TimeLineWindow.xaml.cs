@@ -8,7 +8,7 @@ using System.Windows.Shapes;
 
 namespace Formula1;
 
-public partial class TimeLineWindow : Window
+public partial class TimeLineWindow
 {
     private List<DriverTimeline> _lines;
 
@@ -17,20 +17,21 @@ public partial class TimeLineWindow : Window
         public TimeLineWindow()
         {
             InitializeComponent();
+            _lines = new();
         }
       
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            double scrX = System.Windows.SystemParameters.PrimaryScreenWidth;
-            double scrY = System.Windows.SystemParameters.PrimaryScreenHeight;
+            double scrX = SystemParameters.PrimaryScreenWidth;
+            double scrY = SystemParameters.PrimaryScreenHeight;
             double winX = scrX * .98;
             double winY = scrY * .94;
-            double Xm = (scrX - winX) / 2;
-            double Ym = (scrY - winY) / 4;
-            this.Width = winX;
-            this.Height = winY;
-            this.Left = Xm;
-            this.Top = Ym;
+            double xm = (scrX - winX) / 2;
+            double ym = (scrY - winY) / 4;
+            Width = winX;
+            Height = winY;
+            Left = xm;
+            Top = ym;
         }
         private void ChartScrollViewer_ScrollChanged(object sender, ScrollChangedEventArgs e)
         {
@@ -167,11 +168,17 @@ public partial class TimeLineWindow : Window
                 Races = new List<Resultat>();
             }
 
-            int IComparable<DriverTimeline>.CompareTo(DriverTimeline other)
+            int IComparable<DriverTimeline>.CompareTo(DriverTimeline? other)
             {
                 if (Races.Count < 1) { return 1; }
-                if (other.Races.Count < 1) { return -1; }
-                return this.Races[0].CompareTo(other.Races[0]);
+
+                if (other is { } autre)
+                {
+                    if (autre.Races.Count < 1) { return -1; }
+                    return Races[0].CompareTo(autre.Races[0]);    
+                }
+
+                return 1;
             }
         }
 
@@ -179,20 +186,20 @@ public partial class TimeLineWindow : Window
         {
             internal int Outcome { get; }
             internal DateTime When { get; }
-            internal Resultat(DateTime Quand, int Res)
+            internal Resultat(DateTime quand, int res)
             {
-                Outcome = Res;
-                When = Quand;
+                Outcome = res;
+                When = quand;
             }
 
             int IComparable<Resultat>.CompareTo(Resultat other)
             {
-                return this.When.CompareTo(other.When);
+                return When.CompareTo(other.When);
             }
 
             internal int CompareTo(Resultat other)
             {
-                return this.When.CompareTo(other.When);
+                return When.CompareTo(other.When);
             }
         }
 }

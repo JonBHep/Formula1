@@ -209,8 +209,8 @@ public partial class DriverPickerWindow : Window
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            this.Left = 32;
-            this.Height = Core.LowWindowHeight;
-            this.Top = Core.LowWindowTop;
+            Left = 32;
+            Height = Core.LowWindowHeight;
+            Top = Core.LowWindowTop;
         }
 }

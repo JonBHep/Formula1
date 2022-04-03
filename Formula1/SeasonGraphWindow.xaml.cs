@@ -7,27 +7,27 @@ using System.Windows.Shapes;
 
 namespace Formula1;
 
-public partial class SeasonGraphWindow : Window
+public partial class SeasonGraphWindow
 {
-    public SeasonGraphWindow(int Annee)
+    public SeasonGraphWindow(int annee)
         {
             InitializeComponent();
-            _raceSeason = Core.Instance.Seasons[Annee];
+            _raceSeason = Core.Instance.Seasons[annee];
             _raceSeason.RefreshStatistics();
         }
         private readonly Season _raceSeason;
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            double scrX = System.Windows.SystemParameters.PrimaryScreenWidth;
-            double scrY = System.Windows.SystemParameters.PrimaryScreenHeight;
+            double scrX = SystemParameters.PrimaryScreenWidth;
+            double scrY = SystemParameters.PrimaryScreenHeight;
             double winX = scrX * .98;
             double winY = scrY * .94;
-            double Xm = (scrX - winX) / 2;
-            double Ym = (scrY - winY) / 4;
-            this.Width = winX;
-            this.Height = winY;
-            this.Left = Xm;
-            this.Top = Ym;
+            double xm = (scrX - winX) / 2;
+            double ym = (scrY - winY) / 4;
+            Width = winX;
+            Height = winY;
+            Left = xm;
+            Top = ym;
         }
 
         private void Window_ContentRendered(object sender, EventArgs e)
@@ -41,17 +41,17 @@ public partial class SeasonGraphWindow : Window
         {
             DriversCanvas.Children.Clear();
             ConstructorsCanvas.Children.Clear();
-            TextBlock TitleDriversBlock = new TextBlock() { Text = "DRIVERS' CHAMPIONSHIP", FontWeight = FontWeights.Black };
-            Canvas.SetLeft(TitleDriversBlock, 20);
-            Canvas.SetTop(TitleDriversBlock, 20);
-            DriversCanvas.Children.Add(TitleDriversBlock);
+            TextBlock titleDriversBlock = new TextBlock() { Text = "DRIVERS' CHAMPIONSHIP", FontWeight = FontWeights.Black };
+            Canvas.SetLeft(titleDriversBlock, 20);
+            Canvas.SetTop(titleDriversBlock, 20);
+            DriversCanvas.Children.Add(titleDriversBlock);
 
             if (_raceSeason.PointsAllocationSchemeForConstructors.Applies)
             {
-                TextBlock TitleConstructorsBlock = new TextBlock() { Text = "CONSTRUCTORS' CHAMPIONSHIP", FontWeight = FontWeights.Black };
-                Canvas.SetLeft(TitleConstructorsBlock, 20);
-                Canvas.SetTop(TitleConstructorsBlock, 20);
-                ConstructorsCanvas.Children.Add(TitleConstructorsBlock);
+                TextBlock titleConstructorsBlock = new TextBlock() { Text = "CONSTRUCTORS' CHAMPIONSHIP", FontWeight = FontWeights.Black };
+                Canvas.SetLeft(titleConstructorsBlock, 20);
+                Canvas.SetTop(titleConstructorsBlock, 20);
+                ConstructorsCanvas.Children.Add(titleConstructorsBlock);
             }
             List<int> driverKeys = _raceSeason.SeasonScoringDrivers();
 

@@ -27,9 +27,9 @@ public partial class CarResultWindow : Window
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            Window pop = this.Owner;
+            Window pop = Owner;
             Left = pop.Left + 4;
-            Top = pop.Top + ((pop.ActualHeight - this.ActualHeight) / 2);
+            Top = pop.Top + ((pop.ActualHeight - ActualHeight) / 2);
             RaceMeeting rm = Core.Instance.Races[_result.RaceMeetingKey];
             string tit = Core.Instance.RaceTitles[rm.RaceTitleKey].Caption;
             string dat = rm.RaceDate.ToLongDateString();
@@ -216,13 +216,13 @@ public partial class CarResultWindow : Window
                 {
                     b = (n < top) ? Brushes.Blue : Brushes.Black;
                     w = (n < top) ? FontWeights.Bold : FontWeights.Normal;
-                    t = new TextBlock() { Text = n.ToString(Core.CultureUK), Foreground = b, FontWeight = w };
+                    t = new TextBlock() { Text = n.ToString(Core.CultureUk), Foreground = b, FontWeight = w };
                     c = new ComboBoxItem() { Content = t, Tag = n };
                     GridPosnComboBox.Items.Add(c);
 
                     if (n <= Core.MaxExpectedGrid)
                     {
-                        Button bouton = new Button() { VerticalAlignment = VerticalAlignment.Center, Content = n.ToString(Core.CultureUK), Tag = buttoncount + 1, Width = 40, Margin = new Thickness(4, 0, 0, 0), Foreground = b,Background=Brushes.Ivory, FontWeight = w };
+                        Button bouton = new Button() { VerticalAlignment = VerticalAlignment.Center, Content = n.ToString(Core.CultureUk), Tag = buttoncount + 1, Width = 40, Margin = new Thickness(4, 0, 0, 0), Foreground = b,Background=Brushes.Ivory, FontWeight = w };
                         bouton.Click += GridPositionButton_Click;
                         if (buttoncount > 11) { GridPosnStackPanel2.Children.Add(bouton); } else { GridPosnStackPanel.Children.Add(bouton); }
                         buttoncount++;
@@ -251,7 +251,7 @@ public partial class CarResultWindow : Window
             AddRaceResultEntry((int)Core.RaceResultConstants.Disqualified);
 
             _putativeRacePosition = raceVacancies[0];
-            PositionButton.Content = _putativeRacePosition.ToString(Core.CultureUK);
+            PositionButton.Content = _putativeRacePosition.ToString(Core.CultureUk);
             PositionGoButton.Content = $"{_putativeRacePosition} ->";
             if (raceVacancies[0] < _putativePointsScheme.Count) { PositionGoButton.Visibility= Visibility.Hidden; } // we don't want the user to click the 'Go' button without reviewing the points allocation (if the position is likely to merit points)
             foreach (int n in raceVacancies)
@@ -455,13 +455,13 @@ public partial class CarResultWindow : Window
                 {
                     pointsindividual = _putativePointsScheme[position] / _result.DriverCount;
                 }
-                if (RacePoints0ComboBox.Text == "0") { RacePoints0ComboBox.Text = pointsindividual.ToString(Core.CultureUK); }
+                if (RacePoints0ComboBox.Text == "0") { RacePoints0ComboBox.Text = pointsindividual.ToString(Core.CultureUk); }
                 if (_result.DriverCount > 1)
                 {
-                    if (RacePoints1ComboBox.Text == "0") { RacePoints1ComboBox.Text = pointsindividual.ToString(Core.CultureUK); }
+                    if (RacePoints1ComboBox.Text == "0") { RacePoints1ComboBox.Text = pointsindividual.ToString(Core.CultureUk); }
                     if (_result.DriverCount > 2)
                     {
-                        if (RacePoints2ComboBox.Text == "0") { RacePoints2ComboBox.Text = pointsindividual.ToString(Core.CultureUK); }
+                        if (RacePoints2ComboBox.Text == "0") { RacePoints2ComboBox.Text = pointsindividual.ToString(Core.CultureUk); }
                     }
                 }
             }

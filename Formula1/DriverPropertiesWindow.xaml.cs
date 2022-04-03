@@ -21,7 +21,7 @@ public partial class DriverPropertiesWindow : Window
             GlyphBlockThree.Text= GlyphBlockTwo.Text= GlyphBlockOne.Text = Core.GlyphFatalAccident;
 
             FillCountryComboBox();
-            KeyTextBlock.Text = _driverKey.ToString(Core.CultureUK);
+            KeyTextBlock.Text = _driverKey.ToString(Core.CultureUk);
             Driver d = Core.Instance.Drivers[_driverKey];
             SurnameBox.Text = d.Surname;
             ForenameBox.Text = d.Forenames;

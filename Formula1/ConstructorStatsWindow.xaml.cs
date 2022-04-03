@@ -42,8 +42,8 @@ public partial class ConstructorStatsWindow : Window
                             TextBlock tb = new TextBlock() { Text =Core.ConstructorName( it.Caption) };
                             stack.Children.Add(tb);
                             Tuple<int, int> dates = Core.Instance.ConstructorFirstLastYears(it.Key);
-                            string ds = dates.Item1.ToString(Core.CultureUK);
-                            if (dates.Item2 != dates.Item1) { ds += "-" + dates.Item2.ToString(Core.CultureUK); }
+                            string ds = dates.Item1.ToString(Core.CultureUk);
+                            if (dates.Item2 != dates.Item1) { ds += "-" + dates.Item2.ToString(Core.CultureUk); }
                             tb = new TextBlock() { Foreground = Brushes.CornflowerBlue, Text = ds, Margin = new Thickness(6, 0, 0, 0) };
                             stack.Children.Add(tb);
                             ListBoxItem bi = new ListBoxItem() { Content = stack, Tag = it.Key };
@@ -65,8 +65,8 @@ public partial class ConstructorStatsWindow : Window
                                     TextBlock tb = new TextBlock() { Text = Core.ConstructorName(it.Caption) };
                                     stack.Children.Add(tb);
                                     Tuple<int, int> dates = Core.Instance.ConstructorFirstLastYears(it.Key);
-                                    string ds = dates.Item1.ToString(Core.CultureUK);
-                                    if (dates.Item2 != dates.Item1) { ds += "-" + dates.Item2.ToString(Core.CultureUK); }
+                                    string ds = dates.Item1.ToString(Core.CultureUk);
+                                    if (dates.Item2 != dates.Item1) { ds += "-" + dates.Item2.ToString(Core.CultureUk); }
                                     tb = new TextBlock() { Foreground = Brushes.CornflowerBlue, Text = ds, Margin = new Thickness(6, 0, 0, 0) };
                                     stack.Children.Add(tb);
                                     ListBoxItem bi = new ListBoxItem() { Content = stack, Tag = it.Key };
@@ -89,8 +89,8 @@ public partial class ConstructorStatsWindow : Window
                                     TextBlock tb = new TextBlock() { Text = Core.ConstructorName(it.Caption) };
                                     stack.Children.Add(tb);
                                     Tuple<int, int> dates = Core.Instance.ConstructorFirstLastYears(it.Key);
-                                    string ds = dates.Item1.ToString(Core.CultureUK);
-                                    if (dates.Item2 != dates.Item1) { ds += "-" + dates.Item2.ToString(Core.CultureUK); }
+                                    string ds = dates.Item1.ToString(Core.CultureUk);
+                                    if (dates.Item2 != dates.Item1) { ds += "-" + dates.Item2.ToString(Core.CultureUk); }
                                     tb = new TextBlock() { Foreground = Brushes.CornflowerBlue, Text = ds, Margin = new Thickness(6, 0, 0, 0) };
                                     stack.Children.Add(tb);
                                     ListBoxItem bi = new ListBoxItem() { Content = stack, Tag = it.Key };
@@ -171,7 +171,7 @@ public partial class ConstructorStatsWindow : Window
             NamedItem team = Core.Instance.Constructors[key];
             HistoryListBox.Items.Clear();
             
-            TextBlock b = new TextBlock() { Text = Core.ConstructorName( team.Caption).ToUpper(Core.CultureUK), FontWeight = FontWeights.Bold };
+            TextBlock b = new TextBlock() { Text = Core.ConstructorName( team.Caption).ToUpper(Core.CultureUk), FontWeight = FontWeights.Bold };
             ListBoxItem item = new ListBoxItem() { IsHitTestVisible = false, Content=b };
             HistoryListBox.Items.Add(item);
 

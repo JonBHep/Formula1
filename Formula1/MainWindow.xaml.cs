@@ -27,16 +27,16 @@ namespace Formula1
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            double scrX = System.Windows.SystemParameters.PrimaryScreenWidth;
-            double scrY = System.Windows.SystemParameters.PrimaryScreenHeight;
+            double scrX = SystemParameters.PrimaryScreenWidth;
+            double scrY = SystemParameters.PrimaryScreenHeight;
             double winX = scrX * .98;
             double winY = scrY * .94;
             double Xm = (scrX - winX) / 2;
             double Ym = (scrY - winY) / 4;
-            this.Width = winX;
-            this.Height = winY;
-            this.Left = Xm;
-            this.Top = Ym;
+            Width = winX;
+            Height = winY;
+            Left = Xm;
+            Top = Ym;
             SaveButton.IsEnabled = false;
             ButtonsPanel.Visibility = Visibility.Hidden;
             DriverEditButton.Visibility = Visibility.Hidden;
@@ -83,9 +83,9 @@ namespace Formula1
         private void RacesButton_Click(object sender, RoutedEventArgs e)
         {
             RaceListWindow w = new RaceListWindow() {Owner = this};
-            this.Hide();
+            Hide();
             w.ShowDialog();
-            this.Show();
+            Show();
             if (w.DoneSomething)
             {
                 ListEverything();
@@ -580,7 +580,7 @@ namespace Formula1
                 // Grid position TextBlock
                 string gridpos = (r.GridPosition == Core.SpecialNumber)
                     ? "PL"
-                    : r.GridPosition.ToString(Core.CultureUK);
+                    : r.GridPosition.ToString(Core.CultureUk);
                 TextBlock tbgrid = new TextBlock()
                 {
                     Text = $"Grid: {gridpos}", MinWidth = 56, Foreground = Brushes.DarkSlateBlue
@@ -883,7 +883,7 @@ namespace Formula1
         {
             int key = (int) DriverEditButton.Tag;
             DriverPropertiesWindow w = new DriverPropertiesWindow(key) {Owner = this};
-            this.Hide();
+            Hide();
             bool? q = w.ShowDialog();
             if (q.HasValue && q.Value)
             {
@@ -891,7 +891,7 @@ namespace Formula1
                 SaveButton.IsEnabled = true;
             }
 
-            this.Show();
+            Show();
         }
 
         private void ListDecades()
@@ -957,7 +957,7 @@ namespace Formula1
                 if (yearlist.Contains(annee))
                 {
                     TextBlock tbk = new TextBlock()
-                        {Text = annee.ToString(Core.CultureUK), FontWeight = FontWeights.Bold};
+                        {Text = annee.ToString(Core.CultureUk), FontWeight = FontWeights.Bold};
                     ListBoxItem itm = new ListBoxItem() {Content = tbk, Tag = annee};
                     YearsListBox.Items.Add(itm);
                 }

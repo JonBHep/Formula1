@@ -78,7 +78,8 @@ public partial class RaceMeetingResultsWindow : Window
         private void ListResults()
         {
             Dictionary<int, string> Gpos = new Dictionary<int, string>();
-
+            int previousRaceWinners = 0;
+            int previousChampions = 0;
             RaceMeeting rm = Core.Instance.Races[_raceMeetingKey];
 
             SetConstructorsChampionshipNotice(rm.CountForConstructorsChampionship);
@@ -98,9 +99,6 @@ public partial class RaceMeetingResultsWindow : Window
             {
                 case Core.RankingHealth.HasDuplicates:
                     {
-                        //GridStatusTextBlock.Background = Brushes.Red;
-                        //GridStatusTextBlock.Text = "Bad grid";
-                        //GridStatusTextBlock.ToolTip = "Duplicate(s) in starting grid";
                         GridPositionsBorder.BorderBrush = Brushes.Red;
                         GridPositionsTextBlock.Foreground = Brushes.Red;
                         GridPositionsTextBlock.ToolTip = "Duplicate(s) in starting grid";
@@ -108,9 +106,6 @@ public partial class RaceMeetingResultsWindow : Window
                     }
                 case Core.RankingHealth.HasGaps:
                     {
-                        //GridStatusTextBlock.Background = Brushes.Red;
-                        //GridStatusTextBlock.Text = "Bad grid";
-                        //GridStatusTextBlock.ToolTip = "Gap(s) in starting grid";
                         GridPositionsBorder.BorderBrush = Brushes.Red;
                         GridPositionsTextBlock.Foreground = Brushes.Red;
                         GridPositionsTextBlock.ToolTip = "Gap(s) in starting grid";
@@ -118,9 +113,6 @@ public partial class RaceMeetingResultsWindow : Window
                     }
                 case Core.RankingHealth.HasGapsAndDupes:
                     {
-                        //GridStatusTextBlock.Background = Brushes.Red;
-                        //GridStatusTextBlock.Text = "Bad grid";
-                        //GridStatusTextBlock.ToolTip = "Gap(s) and duplicates() in starting grid";
                         GridPositionsBorder.BorderBrush = Brushes.Red;
                         GridPositionsTextBlock.Foreground = Brushes.Red;
                         GridPositionsTextBlock.ToolTip = "Gap(s) and duplicates() in starting grid";
@@ -128,9 +120,6 @@ public partial class RaceMeetingResultsWindow : Window
                     }
                 default:
                     {
-                        //GridStatusTextBlock.Text = "Grid OK";
-                        //GridStatusTextBlock.Background = Brushes.ForestGreen;
-                        //GridStatusTextBlock.ToolTip = "No gaps or duplicates in starting grid";
                         GridPositionsBorder.BorderBrush = Brushes.ForestGreen;
                         GridPositionsTextBlock.Foreground = Brushes.Black;
                         GridPositionsTextBlock.ToolTip = "No gaps or duplicates in starting grid";
@@ -161,46 +150,75 @@ public partial class RaceMeetingResultsWindow : Window
                 if ((!dunpodium) && (r.RacePosition > 3))
                 {
                     dunpodium = true;
-                    Rectangle sq = new Rectangle() { Width = CompetitorsListBox.ActualWidth * 0.9, Height = 2, Fill = Brushes.Gold };
-                    ListBoxItem l = new ListBoxItem() { Content = sq, IsHitTestVisible = false, Margin = new Thickness(0, 0, 0, 0) };
+                    Rectangle sq = new Rectangle()
+                        {Width = CompetitorsListBox.ActualWidth * 0.9, Height = 2, Fill = Brushes.Gold};
+                    ListBoxItem l = new ListBoxItem()
+                        {Content = sq, IsHitTestVisible = false, Margin = new Thickness(0, 0, 0, 0)};
                     CompetitorsListBox.Items.Add(l);
                 }
-                if ((!dunpoints) && (r.AggregatedPositionPoints==0))
+
+                if ((!dunpoints) && (r.AggregatedPositionPoints == 0))
                 {
                     dunpoints = true;
-                    Rectangle sq = new Rectangle() { Width = CompetitorsListBox.ActualWidth*0.9, Height = 2, Fill = Brushes.DarkKhaki };
-                    ListBoxItem l = new ListBoxItem() { Content = sq, IsHitTestVisible = false, Margin = new Thickness(0, 0, 0, 0) };
+                    Rectangle sq = new Rectangle()
+                        {Width = CompetitorsListBox.ActualWidth * 0.9, Height = 2, Fill = Brushes.DarkKhaki};
+                    ListBoxItem l = new ListBoxItem()
+                        {Content = sq, IsHitTestVisible = false, Margin = new Thickness(0, 0, 0, 0)};
                     CompetitorsListBox.Items.Add(l);
                 }
+
                 if ((!dunplacing) && (!r.Finished))
                 {
                     dunplacing = true;
-                    Rectangle sq = new Rectangle() { Width = CompetitorsListBox.ActualWidth * 0.9, Height = 2, Fill = Brushes.DarkKhaki };
-                    ListBoxItem l = new ListBoxItem() { Content = sq, IsHitTestVisible = false, Margin = new Thickness(0, 0, 0, 0) };
+                    Rectangle sq = new Rectangle()
+                        {Width = CompetitorsListBox.ActualWidth * 0.9, Height = 2, Fill = Brushes.DarkKhaki};
+                    ListBoxItem l = new ListBoxItem()
+                        {Content = sq, IsHitTestVisible = false, Margin = new Thickness(0, 0, 0, 0)};
                     CompetitorsListBox.Items.Add(l);
-                    TextBlock t = new TextBlock() { Text = "NOT PLACED" };
-                    l = new ListBoxItem() { Content = t, IsHitTestVisible = false, Foreground = Brushes.SteelBlue, FontWeight = FontWeights.Medium, Margin = new Thickness(0, 6, 0, 0) };
+                    TextBlock t = new TextBlock() {Text = "NOT PLACED"};
+                    l = new ListBoxItem()
+                    {
+                        Content = t, IsHitTestVisible = false, Foreground = Brushes.SteelBlue
+                        , FontWeight = FontWeights.Medium, Margin = new Thickness(0, 6, 0, 0)
+                    };
                     CompetitorsListBox.Items.Add(l);
                 }
 
                 // set colours
                 Brush pinceau = (r.Finished) ? Brushes.DarkGreen : Brushes.SteelBlue;
-                if ((Core.RaceResultConstants)r.RacePosition == Core.RaceResultConstants.RetFatalDriver) { pinceau = Brushes.Red; }
-                if ((Core.RaceResultConstants)r.RacePosition== Core.RaceResultConstants.DidNotStart) { pinceau = Brushes.Black; }
+                if ((Core.RaceResultConstants) r.RacePosition == Core.RaceResultConstants.RetFatalDriver)
+                {
+                    pinceau = Brushes.Red;
+                }
 
-                if (r.Formula2) { pinceau = Brushes.Salmon; }
-                
+                if ((Core.RaceResultConstants) r.RacePosition == Core.RaceResultConstants.DidNotStart)
+                {
+                    pinceau = Brushes.Black;
+                }
+
+                if (r.Formula2)
+                {
+                    pinceau = Brushes.Salmon;
+                }
+
                 FontWeight weight = (r.AggregatedAllPoints > 0) ? FontWeights.Bold : FontWeights.Normal;
-                if (!dunpodium) { weight = FontWeights.Black; }
+                if (!dunpodium)
+                {
+                    weight = FontWeights.Black;
+                }
 
-                StackPanel panel = new StackPanel() { Orientation = Orientation.Horizontal };
+                StackPanel panel = new StackPanel() {Orientation = Orientation.Horizontal};
 
-                TextBlock tbOutcome = new TextBlock() { Foreground = pinceau, Margin = new Thickness(0, 0, 6, 0) };// margin is to provide a gap in case the outcome will be followed by a 'fastest lap' note
-                TextBlock tbPoints = new TextBlock() { Foreground = Brushes.Magenta };
-                TextBlock tbOutcomeCode = new TextBlock() { Foreground = pinceau, FontWeight = FontWeights.Black };
+                TextBlock tbOutcome = new TextBlock()
+                {
+                    Foreground = pinceau, Margin = new Thickness(0, 0, 6, 0)
+                }; // margin is to provide a gap in case the outcome will be followed by a 'fastest lap' note
+                TextBlock tbPoints = new TextBlock() {Foreground = Brushes.Magenta};
+                TextBlock tbOutcomeCode = new TextBlock() {Foreground = pinceau, FontWeight = FontWeights.Black};
 
                 // Position TextBlock (placeholder if driver not placed)
-                TextBlock tbposn = new TextBlock() { MinWidth = 32, Margin = new Thickness(0, 0, 6, 0), TextAlignment = TextAlignment.Right };
+                TextBlock tbposn = new TextBlock()
+                    {MinWidth = 32, Margin = new Thickness(0, 0, 6, 0), TextAlignment = TextAlignment.Right};
                 string rrd = Core.RaceResultDescription(r.RacePosition);
                 if (r.Finished)
                 {
@@ -216,28 +234,75 @@ public partial class RaceMeetingResultsWindow : Window
                 }
 
                 // Grid position TextBlock
-                string gridpos = (r.GridPosition == Core.SpecialNumber) ? "PL" : r.GridPosition.ToString(Core.CultureUK);
-                TextBlock tbgrid = new TextBlock() { Text = $"Grid: {gridpos}", MinWidth = 56, Foreground = Brushes.DarkSlateBlue, Margin = new Thickness(0, 0, 6, 0) };
+                string gridpos = (r.GridPosition == Core.SpecialNumber)
+                    ? "PL"
+                    : r.GridPosition.ToString(Core.CultureUk);
+                TextBlock tbgrid = new TextBlock()
+                {
+                    Text = $"Grid: {gridpos}", MinWidth = 56, Foreground = Brushes.DarkSlateBlue
+                    , Margin = new Thickness(0, 0, 6, 0)
+                };
 
                 // Driver TextBlock
-                TextBlock DriversTextBlock = new TextBlock() { MinWidth = 450, Margin = new Thickness(0, 0, 6, 0) };
+                TextBlock DriversTextBlock = new TextBlock() {MinWidth = 450, Margin = new Thickness(0, 0, 6, 0)};
                 DateTime racedate = Core.Instance.Races[_raceMeetingKey].RaceDate;
                 _raceDrivers.Add(r.DriverKey(0));
-                DriversTextBlock.Inlines.Add(new Run(Core.Instance.Drivers[r.DriverKey(0)].FullName) { Foreground = pinceau, FontWeight = weight });
+                DriversTextBlock.Inlines.Add(new Run(Core.Instance.Drivers[r.DriverKey(0)].FullName)
+                    {Foreground = pinceau, FontWeight = weight});
+                bool prevWin = (Core.Instance.Drivers[r.DriverKey(0)].RuntimeFirstWinDate < racedate);
+                if (prevWin)
+                {
+                    previousRaceWinners++;
+                    DriversTextBlock.Inlines.Add(new Run($" [R]") {Foreground = Brushes.DarkViolet});
+                }
+
+                bool prevChamp = Core.Instance.FirstChampionshipWin(r.DriverKey(0)) < racedate.Year;
+                if (prevChamp)
+                {
+                    previousChampions++;
+                    DriversTextBlock.Inlines.Add(new Run($" [C]") {Foreground = Brushes.MediumVioletRed});
+                }
                 DriversTextBlock.Inlines.Add(new Run($" {Core.Instance.Drivers[r.DriverKey(0)].AgeAsAt(racedate)}") {Foreground=Brushes.SlateGray });
                 DriversTextBlock.Inlines.Add(Core.Instance.Drivers[r.DriverKey(0)].TimeLeftRun(racedate));
+                
                 if (r.DriverKey(1) > 0)
                 {
                     _raceDrivers.Add(r.DriverKey(1));
                     DriversTextBlock.Inlines.Add(new Run($" and {Core.Instance.Drivers[r.DriverKey(1)].FullName}") { Foreground = pinceau, FontWeight = weight });
+                    prevWin = (Core.Instance.Drivers[r.DriverKey(1)].RuntimeFirstWinDate < racedate);
+                    if (prevWin)
+                    {
+                        previousRaceWinners++;
+                        DriversTextBlock.Inlines.Add(new Run(" [R]") {Foreground = Brushes.DarkViolet});
+                    }
+                    prevChamp = Core.Instance.FirstChampionshipWin(r.DriverKey(1)) < racedate.Year;
+                    if (prevChamp)
+                    {
+                        previousChampions++;
+                        DriversTextBlock.Inlines.Add(new Run($" [C]") {Foreground = Brushes.MediumVioletRed});
+                    }
                     DriversTextBlock.Inlines.Add(Core.Instance.Drivers[r.DriverKey(1)].TimeLeftRun(racedate));
                 }
+                
                 if (r.DriverKey(2) > 0)
                 {
                     _raceDrivers.Add(r.DriverKey(2));
                     DriversTextBlock.Inlines.Add(new Run($" and {Core.Instance.Drivers[r.DriverKey(2)].FullName}") { Foreground = pinceau, FontWeight = weight });
+                    prevWin = (Core.Instance.Drivers[r.DriverKey(2)].RuntimeFirstWinDate < racedate);
+                    if (prevWin)
+                    {
+                        previousRaceWinners++;
+                        DriversTextBlock.Inlines.Add(new Run(" [R]") {Foreground = Brushes.DarkViolet});
+                    }
+                    prevChamp = Core.Instance.FirstChampionshipWin(r.DriverKey(2)) < racedate.Year;
+                    if (prevChamp)
+                    {
+                        previousChampions++;
+                        DriversTextBlock.Inlines.Add(new Run($" [C]") {Foreground = Brushes.MediumVioletRed});
+                    }
                     DriversTextBlock.Inlines.Add(Core.Instance.Drivers[r.DriverKey(2)].TimeLeftRun(racedate));
                 }
+                
                 if (r.Formula2) { DriversTextBlock.Inlines.Add(new Run(" (F2 car)")); }
 
                 string countrytext = Core.Instance.Countries[Core.Instance.Drivers[r.DriverKey(0)].CountryKey].Caption;
@@ -347,9 +412,23 @@ public partial class RaceMeetingResultsWindow : Window
                 {
                     Gpos.Add(r.GridPosition, $"{Core.Instance.Drivers[r.DriverKey(0)].Surname}, {Core.Instance.Drivers[r.DriverKey(0)].Forenames[0]}");
                 }
-
             }
 
+            // Number of previous race winners competing
+            CompetitorsListBox.Items.Add(new ListBoxItem()
+            {
+                IsHitTestVisible = false
+                , Content = new TextBlock()
+                    {Text = $"Previous race winners: {previousRaceWinners} [R]", Foreground = Brushes.BlueViolet}
+            });
+            // Number of previous world champions winners competing
+            CompetitorsListBox.Items.Add(new ListBoxItem()
+            {
+                IsHitTestVisible = false
+                , Content = new TextBlock()
+                    {Text = $"Previous world champions: {previousChampions} [C]", Foreground = Brushes.MediumVioletRed}
+            });
+            
             if (Gpos.Count > 0)
             {
                 List<int> positions = Gpos.Keys.ToList();
@@ -382,6 +461,7 @@ public partial class RaceMeetingResultsWindow : Window
                     GridPositionListBox.Items.Add(li_pl);
                 }
                 
+               
             }
         }
 
@@ -401,7 +481,6 @@ public partial class RaceMeetingResultsWindow : Window
 
         private void WikiButton_Click(object sender, RoutedEventArgs e)
         {
-            //System.Diagnostics.Process.Start(Core.Instance.Races[_raceMeetingKey].WikiLinkRace);
             Core.LaunchWebPage(Core.Instance.Races[_raceMeetingKey].WikiLinkRace);
         }
 

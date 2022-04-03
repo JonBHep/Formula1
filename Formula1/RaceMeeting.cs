@@ -83,7 +83,7 @@ internal class RaceMeeting : IComparable<RaceMeeting>
 
         int IComparable<RaceMeeting>.CompareTo(RaceMeeting other)
         {
-            return this.RaceDate.CompareTo(other.RaceDate);
+            return RaceDate.CompareTo(other.RaceDate);
         }
 
         internal string WikiLinkRace { get { return $"https://en.wikipedia.org/wiki/ { _raceDate.Year} {Core.Instance.RaceTitles[_raceTitleKey].Caption}"; } }

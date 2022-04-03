@@ -116,11 +116,11 @@ internal class Voiture : IComparable<Voiture>
 
         int IComparable<Voiture>.CompareTo(Voiture other)
         {
-            if ((this.RacePosition > 999) && (other.RacePosition > 999))
+            if ((RacePosition > 999) && (other.RacePosition > 999))
             {
-                return this.GridPosition.CompareTo(other.GridPosition);
+                return GridPosition.CompareTo(other.GridPosition);
             }
-            return this.RacePosition.CompareTo(other.RacePosition);
+            return RacePosition.CompareTo(other.RacePosition);
         }
 
         internal bool IncludesDriver(int dkey)
@@ -313,6 +313,6 @@ internal class Voiture : IComparable<Voiture>
 
         int IComparable<RacePoints>.CompareTo(RacePoints other)
         {
-            return this.FloatValue.CompareTo(other.FloatValue);
+            return FloatValue.CompareTo(other.FloatValue);
         }
 }

@@ -50,7 +50,7 @@ internal class Circuit : IComparable<Circuit>
         {
             System.Globalization.CultureInfo eng = new System.Globalization.CultureInfo("en-GB");
             // Create a culturally sensitive sort key for str1.
-            System.Globalization.SortKey sc1 = eng.CompareInfo.GetSortKey(this.CircuitName[0]);
+            System.Globalization.SortKey sc1 = eng.CompareInfo.GetSortKey(CircuitName[0]);
             // Create a culturally sensitive sort key for str2.
             System.Globalization.SortKey sc2 = eng.CompareInfo.GetSortKey(other.CircuitName[0]);
             // Compare the two sort keys and return the result

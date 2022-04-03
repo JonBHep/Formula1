@@ -20,16 +20,16 @@ public partial class CountriesWindow : Window
         internal bool MadeEdit { get { return _edited; } }
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            double scrX = System.Windows.SystemParameters.PrimaryScreenWidth;
-            double scrY = System.Windows.SystemParameters.PrimaryScreenHeight;
+            double scrX = SystemParameters.PrimaryScreenWidth;
+            double scrY = SystemParameters.PrimaryScreenHeight;
             double winX = scrX * .98;
             double winY = scrY * .94;
             double Xm = (scrX - winX) / 2;
             double Ym = (scrY - winY) / 4;
-            this.Width = winX;
-            this.Height = winY;
-            this.Left = Xm;
-            this.Top = Ym;
+            Width = winX;
+            Height = winY;
+            Left = Xm;
+            Top = Ym;
         }
 
         private void Window_ContentRendered(object sender, EventArgs e)
@@ -53,7 +53,7 @@ public partial class CountriesWindow : Window
             lands.Sort();
             foreach (NamedItem pays in lands)
             {
-                TextBlock tb = new TextBlock() { Text = pays.Caption.ToUpper(Core.CultureUK), Foreground = Brushes.Black, FontWeight = FontWeights.Bold };
+                TextBlock tb = new TextBlock() { Text = pays.Caption.ToUpper(Core.CultureUk), Foreground = Brushes.Black, FontWeight = FontWeights.Bold };
                 ListBoxItem li = new ListBoxItem() { Content = tb, Tag = pays.Key };
                 CountryListBox.Items.Add(li);
             }
@@ -70,7 +70,7 @@ public partial class CountriesWindow : Window
             gps.Sort();
             foreach (NamedItem gp in gps)
             {
-                TextBlock tb = new TextBlock() { Text = gp.Caption.ToUpper(Core.CultureUK), Foreground = Brushes.Black, FontWeight = FontWeights.Bold };
+                TextBlock tb = new TextBlock() { Text = gp.Caption.ToUpper(Core.CultureUk), Foreground = Brushes.Black, FontWeight = FontWeights.Bold };
                 ListBoxItem li = new ListBoxItem() { Content = tb, Tag = gp.Key };
                 CountryListBox.Items.Add(li);
             }
@@ -93,7 +93,7 @@ public partial class CountriesWindow : Window
             circs.Sort();
             foreach (NamedItem ci in circs)
             {
-                TextBlock tb = new TextBlock() { Text = ci.Caption.ToUpper(Core.CultureUK), Foreground = Brushes.Black, FontWeight = FontWeights.Bold };
+                TextBlock tb = new TextBlock() { Text = ci.Caption.ToUpper(Core.CultureUk), Foreground = Brushes.Black, FontWeight = FontWeights.Bold };
                 ListBoxItem li = new ListBoxItem() { Content = tb, Tag = ci.Key };
                 CountryListBox.Items.Add(li);
             }

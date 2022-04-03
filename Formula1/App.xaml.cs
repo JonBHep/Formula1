@@ -43,7 +43,7 @@ namespace Formula1
             }
             else
             {
-                App.Current.Shutdown();
+                Current.Shutdown();
             }
         }
 
